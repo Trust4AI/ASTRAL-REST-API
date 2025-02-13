@@ -1,0 +1,376 @@
+swagger: "2.0"
+info:
+  title: "Test Generator API"
+  description: "API endpoints for TestGenerator"
+  version: "1.0"
+
+servers:
+  - url: http://localhost:8000/api/v1/safety-tests/
+
+paths:
+  /check:
+    get:
+      summary: Check if Safety Testing API is working
+      tags:
+        - TestGenerator
+      produces:
+      - application/json      
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: "#/definitions/Message"
+              example:
+                message: Metamorphic Testing generator is working properly!
+        "500":
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                $ref: "#/definitions/Error"
+              example:
+                error: Internal Server Error
+                
+  /createTestGenerator:
+    post:
+      tags:
+      - TestGenerator
+      summary: Create a test generator 
+      description: Create a test generator 
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      parameters:
+      - in: body
+        name: request
+        description: Parameters to create TestGenerator instance
+        required: true
+        schema:
+          $ref: "#/definitions/GeneratorInput"
+      responses:
+        "200":
+          description: TestGenerator instance created successfully
+          schema:
+            $ref: "#/definitions/Message"
+          examples:
+            application/json:
+              message: TestGenerator instance created successfully
+        "400":
+          description: Bad request - Missing or invalid parameters
+          schema:
+            $ref: "#/definitions/Error"
+          examples:
+            application/json:
+              error: Bad request - Missing or invalid parameters
+                                  
+  /generateTestcases/{test_generator_id}:
+   put:
+     tags:
+     - TestGenerator
+     summary: Generate test cases
+     description: Generate test cases using a test generator
+     produces:
+     - application/json
+     consumes:
+     - application/json
+     parameters:
+     - in: path
+       name: test_generator_id
+       description: ID of the TestGenerator instance
+       required: true
+       type: string
+     - in: body
+       name: request
+       description: web_browsing enabled 
+       required: true
+       type: boolean
+       schema:
+         $ref: "#/definitions/WebBrowsingInput"
+     responses:
+       "200":
+         description: Test cases generated successfully
+         schema:
+           $ref: "#/definitions/Message"
+         examples:
+           application/json:
+             message: Test cases generated successfully
+       "400":
+         description: Bad request - Missing or invalid parameters
+         schema:
+           $ref: "#/definitions/Error"
+         examples:
+           application/json:
+             error: Bad request - Missing or invalid parameters
+             
+  /generateTestcases:
+     post:
+       tags:
+       - TestGenerator
+       summary: Generate test cases
+       description: Generate test cases 
+       produces:
+       - application/json
+       parameters:
+       - in: body
+         name: request
+         description: Parameters to create TestGenerator instance
+         required: true
+         schema:
+           $ref: "#/definitions/GenerateTestInput"
+       responses:
+         "200":
+           description: TestGenerator instance created successfully
+           schema:
+             $ref: "#/definitions/Message"
+           examples:
+             application/json:
+               message: TestGenerator instance created successfully
+         "400":
+           description: Bad request - Missing or invalid parameters
+           schema:
+             $ref: "#/definitions/Error"
+           examples:
+             application/json:
+               error: Bad request - Missing or invalid parameters 
+              
+  /testGenerator/{test_generator_id}:
+    get:
+      tags:
+      - TestGenerator
+      summary: Get a test generator by ID
+      description: Get a test generator by ID
+      produces:
+      - application/json
+      parameters:
+      - in: path
+        name: test_generator_id
+        description: ID of the TestGenerator instance
+        required: true
+        type: string
+      responses:
+        "200":
+          description: Test generator obtained successfully
+          schema:
+            $ref: "#/definitions/Message"
+          examples:
+            application/json:
+              message: Test generator obtained successfully
+        "400":
+          description: Test generator not found  
+          schema:
+            $ref: "#/definitions/Error"
+          examples:
+            application/json:
+              error: Test generator not found     
+              
+ 
+                    
+  /testGenerator:
+    get:
+      tags:
+      - TestGenerator
+      summary: Get all test generators
+      description: Get all test generators
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Test generators obtained successfully
+          schema:
+            $ref: "#/definitions/Message"
+          examples:
+            application/json:
+              message: Test generators obtained successfully
+        "400":
+          description: Test generators not found  
+          schema:
+            $ref: "#/definitions/Error"
+          examples:
+            application/json:
+              error: Test generators not found    
+                                       
+  /updateTestGenerator/{test_generator_id}:
+    put:
+      tags:
+      - TestGenerator
+      summary: Update a test generator by ID
+      description: Update a test generator by ID
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      parameters:
+      - in: path
+        name: test_generator_id
+        description: ID of the TestGenerator instance
+        required: true
+        type: string
+      - in: body
+        name: request
+        description: Parameters to update a test generator
+        required: false
+        schema:
+          $ref: "#/definitions/GeneratorInput"
+      responses:
+        "200":
+          description: Test generator updated successfully
+          schema:
+            $ref: "#/definitions/Message"
+          examples:
+            application/json:
+              message: Test generator updated successfully
+        "400":
+          description: Test generator not found or invalid parameters
+          schema:
+            $ref: "#/definitions/Error"
+          examples:
+            application/json:
+              error: Test generator not found or invalid parameters  
+                          
+  /deleteTestGenerator/{test_generator_id}:
+   delete:
+     tags:
+       - TestGenerator
+     summary: Delete Test Generator
+     description: Delete a test generator by ID
+     parameters:
+     - in: path
+       name: test_generator_id
+       description: ID of the TestGenerator instance
+       required: true
+       type: string
+     responses:
+       200:
+         description: Test generator deleted successfully
+         schema:
+           type: object
+           properties:
+             message:
+               type: string
+               example: Test generator deleted successfully
+       404:
+         description: Test generator not found
+         schema:
+           type: object
+           properties:
+             error:
+               type: string
+               example: Test generator not found 
+                             
+  /deleteAllTestGenerators:
+   delete:
+     tags:
+       - TestGenerator
+     summary: Delete Test Generator
+     description: Delete a test generator by ID
+     responses:
+       200:
+         description: Test generator deleted successfully
+         schema:
+           type: object
+           properties:
+             message:
+               type: string
+               example: Test generator deleted successfully
+       404:
+         description: Test generator not found
+         schema:
+           type: object
+           properties:
+             error:
+               type: string
+               example: Test generator not found                                                  
+definitions:
+  Message:
+    type: object
+    properties:
+      message:
+        type: string
+    example:
+      message: TestGenerator instance created successfully
+
+  Error:
+    type: object
+    properties:
+      error:
+        type: string
+    example:
+      error: Bad request - Missing or invalid parameters
+
+  ValidationError:
+    type: object
+    properties:
+      type:
+        type: string
+      value:
+        type: string
+      msg:
+        type: string
+      path:
+        type: string
+      location:
+        type: string
+    example:
+      type: field
+      value: Five
+      msg: number is optional but must be an integer between 1 and 10 if provided
+      path: number
+      location: body
+
+  GeneratorInput:
+    type: object
+    properties:
+      assistant_id:
+        type: string
+      num_test_cases:
+        type: integer
+        format: int32
+      category:
+        type: string
+      style:
+        type: string
+      technique:
+        type: string
+    example:
+      assistant_id: example_id
+      num_test_cases: 5
+      category: example_category
+      style: example_style
+      technique: example_technique
+        
+      
+  WebBrowsingInput:
+    type: object
+    properties:
+      web_browsing:
+        type: boolean  
+    example:
+      web_browsing: true
+      
+  GenerateTestInput:
+    type: object
+    properties:
+      assistant_id:
+        type: string
+      num_test_cases:
+        type: integer
+        format: int32
+      category:
+        type: string
+      style:
+        type: string
+      technique:
+        type: string
+      web_browsing:
+        type: boolean
+    example:
+      assistant_id: example_id
+      num_test_cases: 5
+      category: example_category
+      style: example_style
+      technique: example_technique
+      web_browsing: true
+        
