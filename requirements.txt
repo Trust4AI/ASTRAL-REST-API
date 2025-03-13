@@ -1,0 +1,8 @@
+flask
+flask_restful
+flask_cors
+openai
+ollama
+tavily-python
+flasgger
+sqlalchemy
