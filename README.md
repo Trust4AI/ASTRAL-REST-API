@@ -20,17 +20,14 @@ To view the API documentation, access the following URLs:
 ASTRAL test generator:
 ```
 http://localhost:5000/apidocs
-
 ```
 ASTRAL tet executor:
 ```
 http://localhost:5001/apidocs
-
 ```
 ASTRAL test evaluator:
 ```
-http://localhost:5003/apidocs
-
+http://localhost:5002/apidocs
 ```
 
 
