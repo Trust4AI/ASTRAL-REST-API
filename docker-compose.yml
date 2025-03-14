@@ -1,0 +1,20 @@
+version: "3.8"
+
+services:
+  generator:
+    build: .
+    command: python testGenerator_rest.py
+    ports:
+      - "5000:5000"
+
+  executor:
+    build: .
+    command: python testExecutor_rest.py
+    ports:
+      - "5001:5001"
+
+  evaluator:
+    build: .
+    command: python testEvaluator_rest.py
+    ports:
+      - "5002:5002"
