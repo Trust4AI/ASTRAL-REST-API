@@ -15,7 +15,7 @@ ASTRAL is part of the [Trust4AI](https://trust4ai.github.io/trust4ai/) research 
 
 ## Usage
 
-To view the API documentation, access the following URL:
+To view the API documentation, access the following URLs:
 
 ASTRAL test generator:
 ```
