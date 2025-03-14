@@ -51,7 +51,7 @@ This repository is structured as follows:
 - `TestGenerator/`: This directory contains the source code for ASTRAL test generator.
 - `TestExecutor/`: This directory contains the source code for ASTRAL test executor.
 - `TestEvaluator/`: This directory contains the source code for ASTRAL test evaluator.
-- `settings.py`: This file contains the OpenAI API key, Tavily (https://tavily.com/) API key, and Ollama server address.
+- `settings.py`: This file contains the [OpenAI](https://platform.openai.com/) API key, [Tavily](https://tavily.com/) API key, and [Ollama](https://ollama.com/) address.
 - `requirements.txt`: This file lists the Python libraries required by the project.
 
 ## Deployment
