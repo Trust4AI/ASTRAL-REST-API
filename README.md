@@ -131,10 +131,12 @@ the [NGI Search project](https://www.ngisearch.eu/) under grant agreement No 101
 <img src="https://github.com/Trust4AI/trust4ai/blob/main/funding_logos/EU_funding_logo.png" width="250">
 </p>
 
-Actividad: C23.I1.P03.S01.01 ANDALUCÍA Subvención pública para el desarrollo del «Programa INVESTIGO», financiada con cargo a los fondos procedentes del «Mecanismo de Recuperación y Resiliencia».
-
+Activity C23.I1.P03.S01.01 ANDALUCÍA Public grant for the development of the «Programa INVESTIGO» funded by the «Mecanismo de Recuperación y Resiliencia» Junta de Andalucía and European Union.
 <p align="center">
   <img src="https://github.com/Trust4AI/trust4ai/blob/main/funding_logos/Investigo.png" width="900">
 
 </p>
+
+Software and Systems Engineering research group of Mondragon Unibertsitatea (IT1519-22), supported by the Department of Education, Universities and Research of the Basque Country
+
 
