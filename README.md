@@ -1,3 +1,7 @@
+<div align = center>
+   <img src="https://github.com/Trust4AI/ASTRAL-REST-API/blob/assets/featured.png?raw=true" width="150" />
+</div>
+
 ## ASTRAL: Automated Safety Testing of LLMs 
 
 ASTRAL automates the creation and execution of test cases (i.e., prompts) to evaluate LLM safety. It operates through three core modules: a test generator, a test executor, and a test evaluator. 
