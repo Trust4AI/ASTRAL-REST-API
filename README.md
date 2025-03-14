@@ -1,4 +1,4 @@
-## ASTRAL: LLM Response Evaluator
+## ASTRAL: Automated Safety Testing of LLMs 
 
 ASTRAL automates the creation and execution of test cases (i.e., prompts) to evaluate LLM safety. It operates through three core modules: a test generator, a test executor, and a test evaluator. 
 Integration options include a Docker image launching a REST API with interactive documentation, facilitating its use and integration. 
