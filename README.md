@@ -137,6 +137,6 @@ Activity C23.I1.P03.S01.01 ANDALUCÍA Public grant for the development of the «
 
 </p>
 
-Software and Systems Engineering research group of Mondragon Unibertsitatea (IT1519-22), supported by the Department of Education, Universities and Research of the Basque Country
+Software and Systems Engineering research group of Mondragon Unibertsitatea (IT1519-22), supported by the Department of Education, Universities and Research of the Basque Country.
 
 
