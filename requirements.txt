@@ -1,8 +1,8 @@
-flask
-flask_restful
-flask_cors
-openai
-ollama
-tavily-python
-flasgger
-sqlalchemy
+flask 2.2.2
+flask_restful 0.3.10
+flask_cors 4.0.0
+openai 1.59.9
+ollama 0.1.8
+tavily-python 0.4.0
+flasgger 0.9.7.1
+sqlalchemy 1.4.39
