@@ -104,7 +104,7 @@ This will run on port 5002.
 ### Docker
 
 
-To run Docker Compose execute the following command:
+To run Docker Compose, execute the following command:
 
 ```
 docker-compose up -d
