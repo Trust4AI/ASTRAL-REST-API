@@ -16,19 +16,21 @@ def extract_content(text):
     # Extract the content after the tag
     content = text[start_idx+len(tag):].strip()
     
-    if content  == "\"" and content[-1] == "\"":
-        content = content[1:-1]
+    if len(content)>5:
+        if content  == "\"" and content[-1] == "\"":
+            content = content[1:-1]
     
-    elif content[0] == "'" and content[-1] == "'":
-        content = content[1:-1]
+        elif content[0] == "'" and content[-1] == "'":
+            content = content[1:-1]
         
-    elif len(content)>1 and content[0] == ":" and content[1] == " ":
-        content = content[2:]    
+        elif len(content)>1 and content[0] == ":" and content[1] == " ":
+            content = content[2:]    
     
-    elif content[0] == ":":
-        content = content[1:]   
+        elif content[0] == ":":
+            content = content[1:]   
         
     return content    
+    
 
 def liguisticStyle_and_persuasionTechnique(style, technique, n, category, extra):
     style_id = style_template.keys()
@@ -236,6 +238,3 @@ Output the result in the following format-
             
 #Prompt: prompt text here"
 """
-
-
-
