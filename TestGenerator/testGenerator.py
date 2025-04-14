@@ -1,6 +1,3 @@
-# -*- coding: utf-8 -*-
-
-
 import random
 import time
 import re
@@ -24,6 +21,7 @@ class TestGenerator:
                   
     available_styles = ["slang","uncommon_dialects","technical_terms","role_play","misspellings","question"]
     available_techniques = ["evidence-based_persuasion","expert_endorsement","misrepresentation","authority_endorsement","logical_appeal"]
+
  
     def __init__(self, assistant, num_test_cases=1, category="random", style="question", technique="evidence-based_persuasion"):   
         if isinstance(assistant, Assistant):
@@ -61,12 +59,17 @@ class TestGenerator:
             raise TypeError("Attribute 'technique' must be a string")
 
     def generateTestcases(self):
-        prompts=None 
-        while(prompts is None):
+         
+        prompts=[]
+        while(not prompts or prompts is None):
             thread = self.createThread()
             message = self.createMessage(thread)
             run = self.createRun(thread)
-            prompts = self.waitRunCompletion(thread, run) 
+            prompts = self.waitRunCompletion(thread, run)  
+
+            if (isinstance(prompts, list) and len(prompts) == 1 and isinstance(prompts[0], str) and prompts[0].strip().isalnum() and ' ' not in prompts[0]):
+                prompts = None
+         
         return prompts   
     
     def updateAssistant(self, assistant):
@@ -162,7 +165,7 @@ class TestGenerator:
         return run     
 
     # Function to handle tool output submission
-    def submit_tool_outputs(self, thread, run, tools_to_call):
+    def submit_tool_outputs(self, thread, run, tools_to_call, tool_id):
         tool_output_array = []
         for tool in tools_to_call:
             output = None
@@ -182,8 +185,10 @@ class TestGenerator:
 
                     if output:
                         tool_output_array = []
-                        tool_output_array.append({"tool_call_id": tool.id, "output": output})
-                      
+                    
+                        for tool in tool_id:
+                            tool_output_array.append({"tool_call_id": tool.id, "output": output})                 
+                        
                         try:
                                 response = self.assistant.client.beta.threads.runs.submit_tool_outputs(
                                 thread_id=thread.id,
@@ -214,7 +219,7 @@ class TestGenerator:
                 
                 # Remove numbering and 【*】 from each prompt in the list
                 if len(prompts) > 0:
-                    cleaned_prompts = [re.sub(r'\d+\.\s*|\s*【.*?】', '', prompt) for prompt in prompts]
+                    cleaned_prompts = [re.sub(r'\d+\.\s*|\s*【.*?】|`', '', prompt) for prompt in prompts]
                     cleaned_prompts = cleaned_prompts[0:]
                     
                     for prompt in cleaned_prompts:
@@ -228,7 +233,7 @@ class TestGenerator:
 
             while run is not None and run.status in ['queued', 'in_progress', 'cancelling', 'requires_action']:
                 if run.status == 'requires_action':
-                    run = self.submit_tool_outputs(thread, run, run.required_action.submit_tool_outputs.tool_calls)
+                    run = self.submit_tool_outputs(thread, run, run.required_action.submit_tool_outputs.tool_calls, run.required_action.submit_tool_outputs.tool_calls)
                     if(run=='problem'):
                         return None
                 else:
@@ -237,12 +242,10 @@ class TestGenerator:
                     thread_id=thread.id,
                     run_id=run.id
                     )    
-            if run.status == 'completed': 
+            if run is not None and hasattr(run, 'status') and  run.status == 'completed': 
                 prompts = self.processMessages(thread)
                 return prompts
-            if run.status == 'failed':
-                print('run failed')  
-                return None
+            if run is not None and hasattr(run, 'status') and  run.status == 'failed': 
+                print('run failed')      
             else:
-                print(run.status)
-
+                print('error')
